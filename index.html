@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Elite</title>
+    <link rel="icon" href="images/logo.png" type="image/png" sizes="32x32">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="font-roboto bg-gray-900 text-gray-300 relative" style="overflow: auto;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);"></div>
+    <button id="sidebar-toggle" class="menu-btn p-2" style="display: none;">☰</button>
+    <div id="overlay" class="overlay" style="display: none;"></div>
+    <div class="sidebar" style="transform: translateX(-100%);">
+        <ul class="space-y-2">
+            <li class="tab cursor-pointer hover:text-gray-300">
+                <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo">Tutorials</a>
+            </li>
+            <li class="tab cursor-pointer hover:text-gray-300">
+                <a href="https://pastebin.com/raw/PVZsm8GG">Server Status</a>
+            </li>
+        </ul>
+    </div>
+    <header class="header" style="display: flex;">
+        <div class="logo">Elite</div>
+        <nav class="top-menu">
+            <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo" class="menu-item">Tutorial</a>
+            <a href="https://pastebin.com/raw/PVZsm8GG" class="menu-item">Server Status</a>
+        </nav>
+    </header>
+    <section class="bg-cover bg-center h-screen relative">
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-center space-y-8 z-10 landing-page">
+            <h2 id="WTN" class="text-white text-6xl font-semibold animate__animated animate__fadeInUp animate__duration-700">Welcome to Elite</h2>
+            <div class="content-container">
+                <p class="text-gray-300 max-w-lg animate__animated animate__fadeIn animate__duration-700">A fortnite private dev server that grants you every cosmetic in the game for completely free using Elite</p>
+                <a href="downloadlink" class="discord-button">
+                    <span class="icon"><i class="fab fa-discord fa-lg" style="margin-right: 0px; margin-top: 5px;"></i></span>
+                    <span class="text">Download Dev Server</span>
+                </a>                                      
+            </div>
+        </div>
+    </section>    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const header = document.querySelector('.header');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.transform = 'translateX(-100%)';
+    handleResize();
+
+    function closeSidebar() {
+        sidebar.style.transform = 'translateX(-100%)';
+        sidebarToggleBtn.style.display = 'block';
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function toggleMenu() {
+        const isSidebarHidden = sidebar.style.transform === 'translateX(-100%)';
+        sidebar.style.transform = isSidebarHidden ? 'translateX(0)' : 'translateX(-100%)';
+        sidebarToggleBtn.style.display = isSidebarHidden ? 'none' : 'block';
+        overlay.style.display = isSidebarHidden ? 'block' : 'none';
+        document.body.style.overflow = isSidebarHidden ? 'hidden' : 'auto';
+    }
+
+    sidebarToggleBtn.addEventListener('click', toggleMenu);
+
+    document.addEventListener('click', function (event) {
+        if (!sidebar.contains(event.target) && event.target !== sidebarToggleBtn) {
+            const isMobile = window.innerWidth <= 768;
+            const isSidebarHidden = sidebar.style.transform === 'translateX(-100%)';
+
+            if (isMobile) {
+                closeSidebar();
+            }
+        }
+    });
+
+    function handleResize() {
+        const isMobile = window.innerWidth <= 768;
+        const isSidebarHidden = sidebar.style.transform === 'translateX(-100%)';
+
+        if (isMobile) {
+                document.getElementById('WTN').textContent = 'Elite';
+            } else {
+                document.getElementById('WTN').textContent = 'Welcome to Elite';
+            }
+
+
+        if (!isMobile) {
+            closeSidebar();
+            header.style.display = 'flex';
+            sidebarToggleBtn.style.display = 'none';
+        } else {
+            header.style.display = 'none';
+            sidebarToggleBtn.style.display = isSidebarHidden ? 'block' : 'none';
+        }
+    }
+
+    window.addEventListener('resize', handleResize);
+});
+
+    </script>
+    
+    
+</body></html>
